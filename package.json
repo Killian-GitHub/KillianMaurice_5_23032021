@@ -1,14 +1,22 @@
 {
-  "name": "orinoco-backend",
+  "name": "killianmaurice_5_23022021",
   "version": "1.0.0",
-  "description": "",
+  "description": "Orinoco, commerce de vente en ligne",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch ./sass/main.scss:public/css/style.css -w --style compressed",
+    "prefix": "postcss ./public/css/style.css --use autoprefixer -d ./public/css/prefixed/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Killian-GitHub/KillianMaurice_5_23032021.git"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.2",
     "express": "^4.16.4",
     "uuid": "^3.3.2"
   }
