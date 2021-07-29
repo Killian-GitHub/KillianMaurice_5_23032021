@@ -82,6 +82,16 @@ footer {
     }
 }
 
+#camera-cards {
+    @include tablet {
+        display: flex;
+        flex-wrap: wrap;
+        & :nth-child(5) {
+            margin-left: 4.2%;
+        }
+        }
+}
+
 .product {
     &__body {
         background-color: #FFFF;
