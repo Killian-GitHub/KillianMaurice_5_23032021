@@ -43,6 +43,8 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
 
         document.getElementById('product-card').innerHTML = productPage;
 
+        // ---------- Lenses --------- //
+
         const choice = document.getElementById('lenses-select'); // Boucle de récupération des objectifs //
 
         response.lenses.forEach (function (lenses) {
@@ -52,6 +54,8 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
             choice.appendChild(option); 
         })
 
+        // ---------- Panier ---------- //
+
         const btnAddToPanier = document.getElementById('btn-panier'); // Sélection du bouton "ajouter au panier" //
 
         btnAddToPanier.addEventListener('click', function(event) { // Initialisation de l'action //
@@ -60,14 +64,44 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
             const formChoice = choice.value; // Récupération du choix au formulaire //
             console.log(formChoice);
 
-            let optionProduit = { // Récupération des valeurs du formulaire //
+            let productOption = { // Récupération des valeurs du formulaire //
                 name : response.name,
                 id: response._id,
                 lense: formChoice,
                 quantity : 1,
                 price: response.price
             }
-            console.log(optionProduit);
+            console.log(productOption);
+
+        // ---------- Local Storage ----------//
+
+            let productRegisteredInLocalStorage = JSON.parse(localStorage.getItem ("products")); // Variable key/value du local storage //
+
+            function addToLocalStorage() { // Fonction d'ajout dans le local storage //
+                productRegisteredInLocalStorage.push(productOption); // Ajout de la sélection dans l'array //
+                localStorage.setItem("products", JSON.stringify(productRegisteredInLocalStorage)); // Transformation au format JSON et envoie de la key dans la local storage //
+            }
+
+            function popupConfirmation() { // Popup de confirmation de commande du produit //
+                if(window.confirm(`L'appareil ${response.name} et l'objectif ${formChoice} ont bien été ajouter à votre panier.
+                Ok pour continuer ou Annuler pour revenir l'accueil`)){
+                    window.location.href = "panier.html";
+                }
+
+                else{
+                    window.location.href = "index.html";
+                }
+            }
+
+            if(productRegisteredInLocalStorage){ // Si il y a un produit, ajouter a l'array //
+                addToLocalStorage();
+                popupConfirmation();
+
+            }else{ // Si le storage est vide, créer un array et ajouter un produit //
+                productRegisteredInLocalStorage = [];
+                addToLocalStorage();
+                popupConfirmation();
+            }
         });
 
     })
