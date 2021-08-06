@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Orinoco est un site de vente en ligne spécialisé dans la vente de caméras vintage. Chaque produit que nous proposons est original et authentique, pour le grand plaisir des amateurs et collectionneurs.">
+        <link rel="stylesheet" href="./public/css/style.css"/>
+        <script src="https://kit.fontawesome.com/cccb880cec.js" crossorigin="anonymous"></script>
+        
+        <title>Orinoco, panier</title>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand header__nav" href="index.html">
+                    <img class="header__img" src="./public/logo/logo-orinoco.jpg">
+                </a>
+                <button class="navbar-toggler header__button" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="navbarContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                Accueil
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="basket.html">
+                                Panier
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <!-- Alert -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <h5 class="alert-heading">Plus qu'une étape pour valider votre panier.</h5>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                   <span aria-hidden="true">×</span>
+                                </button>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-4 mb-4 panier__body">
+                    <div class="row">
+                        <!-- Commande -->
+                        <div class="card col-12">
+                            <div class="card-body">
+                                <h2 class="card-title mt-1 pb-3 border-bottom">
+                                    Votre panier :
+                                </h2>
+                                <div id="product-basket" class="container">
+                                    <!-- Insertion des produits dnas le panier -->
+                                </div>
+                                <p class="card-text text-right font-weight-bold pt-3 border-top">
+                                    Sous-total
+                                </p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- Adresse -->
+                <div class="container mt-4 mb-4 panier__body">
+                    <div class="row">
+                        <div class="card col-12 col-md-7">
+                            <div class="card-body">
+                                <h2 class="card-title border-bottom pb-3">Adresse de livraison</h2>
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">
+                                            Nom :
+                                        </label>
+                                        <input type="name-info" class="form-control" id="name" placeholder="Ex : Dupont">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="surname">
+                                            Prénom :
+                                        </label>
+                                        <input type="surname-info" class="form-control" id="surname" placeholder="Ex : Martin">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="adress">
+                                            Adresse :
+                                        </label>
+                                        <input type="adress-info" class="form-control" id="adress" placeholder="Ex : 6 rue de la marre au Chênes">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">
+                                            Ville :
+                                        </label>
+                                        <input type="city-info" class="form-control" id="city" placeholder="Ex : Lyon, 69000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">
+                                            Adresse e-mail :
+                                        </label>
+                                        <input type="email" class="form-control" id="email" placeholder="Ex : dupontmartin@gmail.com">
+                                    </div>
+                                    <div class="form-check mt-4">
+                                        <input type="checkbox" class="form-check-input" id="cgv-check">
+                                        <label class="form-check-label" for="cgvCheck">
+                                            Accepter les conditions générales de vente
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Total -->
+                        <div class="card col-12 col-md-4">
+                            <div class="card-body">
+                                <h2 class="card-title mt-1 pb-3 border-bottom">
+                                    Total
+                                </h2>
+                                <p class="card-text mt-5 font-weight-bold">
+                                    Sous-total
+                                </p>
+                                <p class="card-text mt-5 font-weight-bold">
+                                    Livraison offerte 
+                                </p>
+                                <button class="btn btn-success btn-block mt-5 mb-5">
+                                    PAIEMENT
+                                </button>
+                                <p class="card-text font-weight-bold">
+                                    Nous acceptons :
+                                </p>
+                                <div class="payment-card__container">
+                                    <i class="payment-card fab fa-cc-visa"></i>
+                                    <i class="payment-card fab fa-cc-mastercard"></i>
+                                    <i class="payment-card fab fa-cc-paypal"></i>
+                                    <i class="payment-card fab fa-cc-amex"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <ul class="list-inline list-unstyled text-center">
+                            <li class="list-inline-item">
+                                <a class="nav-link" href="#">
+                                    Condition générales de vente
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="nav-link" href="#">
+                                    A propos
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="nav-link" href="mailto:orinoco@contact.com">
+                                    Contact
+                                </a>
+                            </li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/product.js"></script>
+    <script type="text/javascript" src="./js/basket.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+
+</html>
