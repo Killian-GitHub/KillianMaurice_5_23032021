@@ -43,5 +43,26 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
     if(j === productRegisteredInLocalStorage.length) { // Condition de récupération des éléments //
         document.getElementById('product-basket').innerHTML = inTheBasket;
     }
-    
+
+    // ---------- Bouton pour vider le panier ---------- //
+
+    const buttonForDeleteBasket = // Création Html du bouton //
+    `<button id="btn-delete-basket" class="btn-sm btn-danger" type="button">
+        Vider le panier  
+    </button>`;
+
+    document.getElementById('delete-basket').innerHTML = buttonForDeleteBasket; // Insertion du bouton //
+
+    const btnDeleteBasket = document.getElementById('btn-delete-basket'); // Sélection du bouton //
+
+    btnDeleteBasket.addEventListener('click', function(event) { // Initialisation de l'action //
+    event.preventDefault()
+
+    localStorage.removeItem('products'); // Suppression de tous produits dans le panier //
+
+    alert('Votre panier a été vidé') // Message d'alerte //
+
+    window.location.href = 'basket.html'; // Rechargement de la page //
+
+    })
 }
