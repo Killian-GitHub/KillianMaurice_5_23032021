@@ -17,7 +17,7 @@ fetch('http://localhost:3000/api/cameras') // Requête http //
                         ${response[i].name}
                     </h2>
                     <p class="card-text text-right font-weight-bold">
-                        ${(response[i].price/100).toFixed(2).replace(".",",")}€
+                        ${(response[i].price/100).toFixed(2).replace(".",",")} €
                     </p>
                 </div>
             </div>`

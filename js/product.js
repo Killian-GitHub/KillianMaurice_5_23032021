@@ -32,10 +32,10 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
                     </select>
                 </form>
                 <p class="mt-4 mt-md-5 ml-2 font-weight-bold">
-                    ${(response.price/100).toFixed(2).replace(".",",")}€
+                    ${(response.price/100).toFixed(2).replace(".",",")} €
                 </p>
                 <div class="col text-center mt-4 mb-4">
-                    <button id="btn-panier" class="btn btn-primary" type="button">
+                    <button id="btn-basket" class="btn btn-primary" type="button">
                         Ajouter au panier   
                     </button>
                 </div>
@@ -56,15 +56,16 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
 
         // ---------- Panier ---------- //
 
-        const btnAddToPanier = document.getElementById('btn-panier'); // Sélection du bouton "ajouter au panier" //
+        const btnAddToBasket = document.getElementById('btn-basket'); // Sélection du bouton "ajouter au panier" //
 
-        btnAddToPanier.addEventListener('click', function(event) { // Initialisation de l'action //
+        btnAddToBasket.addEventListener('click', function(event) { // Initialisation de l'action //
             event.preventDefault();
 
             const formChoice = choice.value; // Récupération du choix au formulaire //
             console.log(formChoice);
 
             let productOption = { // Récupération des valeurs du formulaire //
+                image : response.imageUrl,
                 name : response.name,
                 id: response._id,
                 lense: formChoice,
@@ -85,7 +86,7 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
             function popupConfirmation() { // Popup de confirmation de commande du produit //
                 if(window.confirm(`L'appareil ${response.name} et l'objectif ${formChoice} ont bien été ajouter à votre panier.
                 Ok pour continuer ou Annuler pour revenir l'accueil`)){
-                    window.location.href = "panier.html";
+                    window.location.href = "basket.html";
                 }
 
                 else{
