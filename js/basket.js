@@ -55,7 +55,7 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
 
     const btnDeleteBasket = document.getElementById('btn-delete-basket'); // Sélection du bouton //
 
-    btnDeleteBasket.addEventListener('click', function(event) { // Initialisation de l'action //
+    btnDeleteBasket.addEventListener('click', function(event) { // Initialisation du bouton //
     event.preventDefault()
 
     localStorage.removeItem('products'); // Suppression de tous produits dans le panier //
@@ -65,10 +65,86 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
     window.location.href = 'basket.html'; // Rechargement de la page //
 
     })
-}
 
-// ---------- Prix total ---------- //
+    const orderForm = // Création Html du formulaire //
+        `<div class="card-body">
+            <h2 class="card-title border-bottom pb-3">Adresse de livraison</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">
+                        Nom :
+                    </label>
+                    <input type="text" class="form-control" id="form-name" placeholder="Ex : Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label for="surname">
+                        Prénom :
+                    </label>
+                    <input type="text" class="form-control" id="form-firstname" placeholder="Ex : Martin" required>
+                </div>
+                <div class="form-group">
+                    <label for="adress">
+                        Adresse :
+                    </label>
+                    <input type="text" class="form-control" id="form-adress" placeholder="Ex : 6 rue de la marre au Chênes" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">
+                        Ville :
+                    </label>
+                    <input type="text" class="form-control" id="form-city" placeholder="Ex : Lyon" required>
+                </div>
+                <div class="form-group">
+                    <label for="city-number">
+                        Code postal :
+                    </label>
+                    <input type="text" class="form-control" id="form-city-number" placeholder="Ex : 69000" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        Adresse e-mail :
+                    </label>
+                    <input type="text" class="form-control" id="form-email" placeholder="Ex : dupontmartin@gmail.com" required>
+                </div>
+            </form>
+        </div>`;
+    
+    document.getElementById('order-form').innerHTML = orderForm;
 
+    const validateTheOrder = // Création Html du paiement //
+        `<div class="card-body">
+            <div class="row border-bottom mt-4 mb-5 pb-3">
+                <h2 class="card-title col-6">
+                    Total
+                </h2>
+                <p id="price-display" class="card-text col-6 text-right font-weight-bold">
+                    <!-- Insertion du prix total du panier -->
+                </p>
+            </div>
+            <p class="card-text mt-5 mb-5 font-weight-bold">
+                Livraison offerte 
+            </p>
+            <button id="btn-for-valid-order" class="btn btn-success btn-block mt-5 mb-5">
+                PAIEMENT
+            </button>
+            <p class="card-text font-weight-bold mt-5 mb-4">
+                Nous acceptons :
+            </p>
+            <div class="payment-card__container">
+                <i class="payment-card fab fa-cc-visa"></i>
+                <i class="payment-card fab fa-cc-mastercard"></i>
+                <i class="payment-card fab fa-cc-paypal"></i>
+                <i class="payment-card fab fa-cc-amex"></i>
+            </div>
+        </div>`;
+
+        document.getElementById('validate-the-order').innerHTML = validateTheOrder;
+
+
+};
+
+    // ---------- Prix total ---------- //
+        
 let totalPriceTable = []; // Tableau de regroupement du prix des produits // 
 
 for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de récupération des prix //
@@ -77,8 +153,130 @@ for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de r�
     totalPriceTable.push(priceProductsInTheBasket) // Envoie du prix des articles dans le tableau //
 }
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue; // Constante pour le calcul du prix //
+    const reducer = (accumulator, currentValue) => accumulator + currentValue; // Constante pour le calcul du prix //
 
-const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
+    const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
+        
+    document.getElementById('price-display').innerHTML = totalPrice + ' €';
 
-document.getElementById('price-display').innerHTML = totalPrice;
+    // ---------- Formulaire ---------- //
+
+const btnForValidOrder = document.getElementById('btn-for-valid-order'); // Sélection du bouton //
+
+
+btnForValidOrder.addEventListener('click', function(event){ // Initialisation du bouton //
+    event.preventDefault()
+
+    class Form{ // Création d'une classe pour regrouper les valeurs du formulaire //
+        constructor(){
+        this.name = document.getElementById('form-name').value;
+        this.firstname = document.getElementById('form-firstname').value;
+        this.adress = document.getElementById('form-adress').value;
+        this.city = document.getElementById('form-city').value;
+        this.city_number = document.getElementById('form-city-number').value;
+        this.email = document.getElementById('form-email').value;
+        }
+    }
+
+    const formValues = new Form(); // Boucle de création du nouvel objet //
+
+    // ----- Validation des données du formulaire ----- //
+
+    const textAlert = (value) => { // Création de l'alerte de saise pour nom et prénom //
+        return `${value} : Les chiffres et symboles ne sont pas autorisés, utilisez entre 3 et 20 caractères`;
+    }
+
+    const writingError = ("votre saisie n'est pas valide, ")
+
+    const regExNames = (value) => { // Création d'une regex pour le nom et le prénom //
+        return /^[A-Za-z\-\s]{3,20}$/.test(value); // Description de la condition a tester //
+    }
+
+    const regExAdress = (value) => {
+        return /^[A-Za-z0-9\-\s]{5,35}$/.test(value);
+    }
+
+    const regExCity = (value) => { // Création de la regex pour la ville //
+        return /^[A-Za-z\-\s]{4,20}$/.test(value);
+    }
+
+    const regExCity_number = (value) => { // Création de la regex pour le code postale //
+        return /^[0-9]{5}$/.test(value);
+    }
+
+    const regExEmail = (value) => { // Création de la regex pour l' Email //
+        return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(value);
+    }
+
+    function nameConfirmation() { // Fonction pour le test de la valeur  //
+        const customerName = formValues.name; // Constante de récupération des valeurs 
+        if(regExNames(customerName)){ // Saisie de la valeur a tester avec la RegEx //
+            return true;
+        }else{
+            alert(textAlert('Nom')); // Envoie de l'alerte si la saise n'est pas validé par la RegEx //
+            return false;
+        }
+    };
+
+    function firstnameConfirmation() {
+        const customerFirstname = formValues.name;
+        if(regExNames(customerFirstname)){
+            return true;
+        }else{
+            alert(textAlert('Prénom'));
+            return false;
+        }
+    };
+
+    function cityConfirmation() {
+        const customerCity = formValues.city;
+        if(regExCity(customerCity)){
+            return true;
+        }else{
+            alert("Ville : " + writingError + "entrez le nom de votre ville")
+            return false;
+        }
+    };
+
+    function cityNumberConfirmation() {
+        const customerCityNumber = formValues.city_number;
+        if(regExCity_number(customerCityNumber)){
+            return true;
+        }else{
+            alert("Code postal : " + writingError + "utilisez au minimum 5 chiffres")
+            return false;
+        }
+    };
+
+    function emailConfirmation() {
+        const customerEmail = formValues.email;
+        if(regExEmail(customerEmail)){
+            return true;
+        }else{
+            alert("Email : " + writingError + "saisissez votre email")
+            return false;
+        }
+    };
+
+    function adressConfirmation() {
+        const customerAdress = formValues.adress;
+        if(regExAdress(customerAdress)){
+            return true;
+        }else{
+            alert("Adresse : " + writingError + "entrez votre adresse sans caractères spéciaux")
+            return false;
+        }
+    };
+
+    if(nameConfirmation(), firstnameConfirmation(), cityConfirmation(), cityNumberConfirmation(), emailConfirmation(), adressConfirmation()) { // Fonction de validation, si le formulaire est bien rempli, envoyer dans le local storage //
+        localStorage.setItem('formValues', JSON.stringify(formValues)); // Envoie des informations du formulaire dans le local storage et conversion JSON //
+    }
+    
+
+    // ---------- Commande ---------- //
+
+    const sendToServer = { // Récupération des produits sélectionnés et des informations du formulaire dans un objet a envoyer au serveur //
+        productRegisteredInLocalStorage,
+        formValues
+    }
+})

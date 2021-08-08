@@ -40,19 +40,6 @@
         </header>
         <main>
             <section>
-                <!-- Alert -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 mb-0">
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <h5 class="alert-heading">Plus qu'une étape pour valider votre panier.</h5>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                   <span aria-hidden="true">×</span>
-                                </button>
-                             </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="container mt-4 mb-4 panier__body">
                     <div class="row">
                         <!-- Commande -->
@@ -62,91 +49,23 @@
                                     Votre panier :
                                 </h2>
                                 <div id="product-basket" class="container">
-                                    <!-- Insertion des produits dnas le panier -->
+                                    <!-- Insertion des produits dans le panier -->
                                 </div>
                                 <div id="delete-basket" class="text-right">
+                                    <!-- Bouton de suppression du panier -->
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-                <!-- Adresse -->
+                <!-- Formulaire -->
                 <div class="container mt-4 mb-4 panier__body">
                     <div class="row">
-                        <div class="card col-12 col-md-7">
-                            <div class="card-body">
-                                <h2 class="card-title border-bottom pb-3">Adresse de livraison</h2>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="name">
-                                            Nom :
-                                        </label>
-                                        <input type="name-info" class="form-control" id="name" placeholder="Ex : Dupont">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="surname">
-                                            Prénom :
-                                        </label>
-                                        <input type="surname-info" class="form-control" id="surname" placeholder="Ex : Martin">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="adress">
-                                            Adresse :
-                                        </label>
-                                        <input type="adress-info" class="form-control" id="adress" placeholder="Ex : 6 rue de la marre au Chênes">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="city">
-                                            Ville :
-                                        </label>
-                                        <input type="city-info" class="form-control" id="city" placeholder="Ex : Lyon, 69000">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">
-                                            Adresse e-mail :
-                                        </label>
-                                        <input type="email" class="form-control" id="email" placeholder="Ex : dupontmartin@gmail.com">
-                                    </div>
-                                    <div class="form-check mt-4">
-                                        <input type="checkbox" class="form-check-input" id="cgv-check">
-                                        <label class="form-check-label" for="cgvCheck">
-                                            Accepter les conditions générales de vente
-                                        </label>
-                                    </div>
-                                </form>
-                            </div>
+                        <div id="order-form" class="card col-12 col-md-7">
+                            <!-- Insertion du formulaire -->
                         </div>
-                        <!-- Total -->
-                        <div class="card col-12 col-md-4">
-                            <div class="card-body">
-                                <div class="row border-bottom mt-1 pb-3">
-                                    <h2 class="card-title col-6">
-                                        Total
-                                    </h2>
-                                    <p id="price-display" class="card-text col-6 text-right font-weight-bold">
-                                        <!-- Insertion du prix total du panier -->
-                                    </p>
-                                </div>
-                                <p class="card-text mt-5 font-weight-bold">
-                                    Sous-total
-                                </p>
-                                <p class="card-text mt-5 font-weight-bold">
-                                    Livraison offerte 
-                                </p>
-                                <button class="btn btn-success btn-block mt-5 mb-5">
-                                    PAIEMENT
-                                </button>
-                                <p class="card-text font-weight-bold">
-                                    Nous acceptons :
-                                </p>
-                                <div class="payment-card__container">
-                                    <i class="payment-card fab fa-cc-visa"></i>
-                                    <i class="payment-card fab fa-cc-mastercard"></i>
-                                    <i class="payment-card fab fa-cc-paypal"></i>
-                                    <i class="payment-card fab fa-cc-amex"></i>
-                                </div>
-                            </div>
+                        <div id="validate-the-order" class="card col-12 col-md-4">
+                            <!-- Insertion de la validation de commande -->
                         </div>
                     </div>
                 </div>
