@@ -140,7 +140,6 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
 
         document.getElementById('validate-the-order').innerHTML = validateTheOrder;
 
-
 };
 
     // ---------- Prix total ---------- //
@@ -188,16 +187,12 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
 
     const writingError = ("votre saisie n'est pas valide, ")
 
-    const regExNames = (value) => { // Création d'une regex pour le nom et le prénom //
+    const regExNamesAndCity = (value) => { // Création d'une regex pour le nom, le prénom et la ville //
         return /^[A-Za-z\-\s]{3,20}$/.test(value); // Description de la condition a tester //
     }
 
-    const regExAdress = (value) => {
+    const regExAdress = (value) => { // Création d'un regex pour l'adresse //
         return /^[A-Za-z0-9\-\s]{5,35}$/.test(value);
-    }
-
-    const regExCity = (value) => { // Création de la regex pour la ville //
-        return /^[A-Za-z\-\s]{4,20}$/.test(value);
     }
 
     const regExCity_number = (value) => { // Création de la regex pour le code postale //
@@ -210,7 +205,7 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
 
     function nameConfirmation() { // Fonction pour le test de la valeur  //
         const customerName = formValues.name; // Constante de récupération des valeurs 
-        if(regExNames(customerName)){ // Saisie de la valeur a tester avec la RegEx //
+        if(regExNamesAndCity(customerName)){ // Saisie de la valeur a tester avec la RegEx //
             return true;
         }else{
             alert(textAlert('Nom')); // Envoie de l'alerte si la saise n'est pas validé par la RegEx //
@@ -220,7 +215,7 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
 
     function firstnameConfirmation() {
         const customerFirstname = formValues.name;
-        if(regExNames(customerFirstname)){
+        if(regExNamesAndCity(customerFirstname)){
             return true;
         }else{
             alert(textAlert('Prénom'));
@@ -230,7 +225,7 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
 
     function cityConfirmation() {
         const customerCity = formValues.city;
-        if(regExCity(customerCity)){
+        if(regExNamesAndCity(customerCity)){
             return true;
         }else{
             alert("Ville : " + writingError + "entrez le nom de votre ville")
@@ -273,10 +268,27 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
     }
     
 
-    // ---------- Commande ---------- //
+    // ---------- Serveur ---------- //
 
-    const sendToServer = { // Récupération des produits sélectionnés et des informations du formulaire dans un objet a envoyer au serveur //
+    let sendToServer = JSON.stringify({ // Récupération des produits sélectionnés et des informations du formulaire dans un objet a envoyer au serveur //
         productRegisteredInLocalStorage,
-        formValues
-    }
-})
+        formValues,
+    })
+
+    fetch('http://localhost:3000/api/cameras/order', { // Envoie de la commande au serveur avec POST //
+        method: 'POST',
+        headers: {
+            "Content-Type" : "application/json",
+        },
+        body: sendToServer,
+    })
+    .then((response) => response.json())
+    .then((r) => {
+        localStorage.setItem('form', JSON.stringify(r.form));
+        window.location.assign('order.html?orderId=' + r.orderId);
+    })
+    .catch(function (error) {
+        console.log('fetch error')
+    });
+
+});

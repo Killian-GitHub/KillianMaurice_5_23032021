@@ -5,7 +5,6 @@ const productId = window.location.search.substring(1); // Récupération de l'Id
 fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
     .then((response) => response.json())
     .then(response => {
-        console.log(productId);
 
         let productPage = ""; // Variable de la fiche produit //
 
