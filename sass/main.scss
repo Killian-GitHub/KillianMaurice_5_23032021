@@ -128,3 +128,11 @@ footer {
 .payment-card {
     font-size: 25px;
 }
+
+.confirmation {
+    &__container {
+        @include tablet {
+            margin: 120px auto;
+        }
+    }
+}
