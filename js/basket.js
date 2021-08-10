@@ -114,10 +114,10 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
     const validateTheOrder = // Création Html du paiement //
         `<div class="card-body">
             <div class="row border-bottom mt-4 mb-5 pb-3">
-                <h2 class="card-title col-6">
+                <h2 class="card-title col-5">
                     Total
                 </h2>
-                <p id="price-display" class="card-text col-6 text-right font-weight-bold">
+                <p id="price-display" class="card-text col-7 text-right font-weight-bold">
                     <!-- Insertion du prix total du panier -->
                 </p>
             </div>
@@ -156,7 +156,7 @@ for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de r�
 
     const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
         
-    document.getElementById('price-display').innerHTML = totalPrice + ' €';
+    document.getElementById('price-display').innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
 
     // ---------- Formulaire ---------- //
 
