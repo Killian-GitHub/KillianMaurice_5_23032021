@@ -71,15 +71,14 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
                 quantity : 1,
                 price: response.price
             }
-            console.log(productOption);
 
         // ---------- Local Storage ----------//
 
-            let productRegisteredInLocalStorage = JSON.parse(localStorage.getItem ("products")); // Variable key/value du local storage //
+            let productRegisteredInLocalStorage = JSON.parse(localStorage.getItem ("productSelected")); // Variable key/value du local storage //
 
             function addToLocalStorage() { // Fonction d'ajout dans le local storage //
                 productRegisteredInLocalStorage.push(productOption); // Ajout de la sélection dans l'array //
-                localStorage.setItem("products", JSON.stringify(productRegisteredInLocalStorage)); // Transformation au format JSON et envoie de la key dans la local storage //
+                localStorage.setItem("productSelected", JSON.stringify(productRegisteredInLocalStorage)); // Transformation au format JSON et envoie de la key dans la local storage //
             }
 
             function popupConfirmation() { // Popup de confirmation de commande du produit //
@@ -106,7 +105,4 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
 
     })
     
-    .catch(e => { // Message d'erreur //
-        errorMessage();
-        console.log(e);
-    });
+    .catch((erreur) => console.log("erreur : " + erreur));

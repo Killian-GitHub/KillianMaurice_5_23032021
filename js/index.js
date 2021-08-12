@@ -26,7 +26,4 @@ fetch('http://localhost:3000/api/cameras') // Requête http //
         document.getElementById("camera-cards").innerHTML = getAllCameras; // Insertion des produits //
     })
 
-    .catch(e => { // Message d'erreur //
-        errorMessage();
-        console.log(e);
-    });
+    .catch((erreur) => console.log("erreur : " + erreur));
