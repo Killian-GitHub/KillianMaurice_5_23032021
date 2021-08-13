@@ -1,0 +1,7 @@
+.confirmation {
+    &__container {
+        @include tablet {
+            margin: 120px auto;
+        }
+    }
+}

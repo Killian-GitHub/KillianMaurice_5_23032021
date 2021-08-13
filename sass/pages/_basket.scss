@@ -1,0 +1,12 @@
+.panier {
+    &__img {
+        width: 150px;
+        height: 100px;
+        object-fit: cover;
+        opacity: 0.8;
+    }
+}
+
+.payment-card {
+    font-size: 25px;
+}

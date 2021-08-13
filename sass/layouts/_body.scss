@@ -1,0 +1,9 @@
+body {
+    background-color: #ededed;
+}
+
+main {
+    @include desktop {
+        margin: 50px 0;
+    }
+}

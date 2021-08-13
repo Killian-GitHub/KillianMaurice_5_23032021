@@ -1,0 +1,40 @@
+header {
+    margin: 10px 5%;
+    @include desktop {
+        margin: 0;
+        background-color: #FFFF;
+    }
+    .header {
+        &__nav {
+            width: 60%;
+            @include desktop {
+                width: 85%;
+            }
+        }
+        &__img {
+            width: 70%;
+            @include tablet {
+                width: 35%;
+            }
+            @include desktop {
+                width: 15%;
+            }
+            &-1 {
+                @include desktop {
+                    display: none;
+                }
+            }
+            &-2 {
+                @include mobile {
+                    display: none;
+                }
+                @include desktop {
+                    display: inline;
+                }
+            }
+        }
+        &__button {
+            outline: none;
+        }
+    }
+}

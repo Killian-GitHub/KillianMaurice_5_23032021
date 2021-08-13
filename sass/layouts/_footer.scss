@@ -1,0 +1,9 @@
+footer {
+    @include tablet {
+        margin-top: 30px;
+    }
+    @include desktop {
+        background-color: #FFFF;
+        padding: 20px 0 10px;
+    }
+}
