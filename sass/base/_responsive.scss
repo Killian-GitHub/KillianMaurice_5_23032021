@@ -1,11 +1,19 @@
 // variables
 
+$screen-small: 320px;
+
 $screen-medium: 768px;
 
 $screen-large: 992px;
 
 
 // mixins
+
+@mixin mobile {
+    @media (min-width: #{$screen-small}) {
+        @content;
+    }
+}
 
 @mixin tablet {
     @media (min-width: #{$screen-medium}) {

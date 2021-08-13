@@ -28,6 +28,19 @@ header {
             @include desktop {
                 width: 15%;
             }
+            &-1 {
+                @include desktop {
+                    display: none;
+                }
+            }
+            &-2 {
+                @include mobile {
+                    display: none;
+                }
+                @include desktop {
+                    display: inline;
+                }
+            }
         }
         &__button {
             outline: none;
