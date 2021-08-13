@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="./public/css/style.css"/>
         <script src="https://kit.fontawesome.com/cccb880cec.js" crossorigin="anonymous"></script>
         
-        <title>Orinoco, accueil</title>
+        <title>Orinoco, commande</title>
     </head>
 
     <body>
@@ -44,13 +44,14 @@
                     <div class="row" id="order-confirmation">
                         <div class="col col-md-10 mx-auto bg-light mb-3 mt-3 p-5 rounded">
                             <h2 class="text-center">
-                                Confirmation de votre commande n° <span id="order-id"></span>
+                                Confirmation de votre commande n° <span id="order-id"> <!-- Insertion du numéro de commande --></span>
                             </h2>
                             <p class="text-center mt-5">
-                                Vous allez recevoir un email contenant toute les information relative a votre commande dans quelques instant.
+                                Cher <span id="customer-name" class="font-weight-bold"></span>, l'équipe Orinocamera vous remercie pour votre commande.
+                                Nous espérons que votre nouveaux matériel vous apporteras entière sitisfaction.
                             </p>
                             <p class="text-center">
-                                L'équipe Orinocamera vous remercie de votre commande.
+                                Vous aller recevoir un email contenant toute les information relative a votre commande dans quelques instant.
                             </p>
                         </div>
                     </div>
@@ -84,6 +85,10 @@
             </div>
         </footer>
 
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/product.js"></script>
+    <script type="text/javascript" src="./js/basket.js"></script>
+    <script type="text/javascript" src="./js/order.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

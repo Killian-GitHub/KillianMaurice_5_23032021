@@ -86,19 +86,13 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
                     <label for="adress">
                         Adresse :
                     </label>
-                    <input type="text" class="form-control" id="form-adress" placeholder="Ex : 6 rue de la marre au Chênes" required>
+                    <input type="text" class="form-control" id="form-adress" placeholder="Ex : 6 rue de la mare au Chêne" required>
                 </div>
                 <div class="form-group">
                     <label for="city">
                         Ville :
                     </label>
                     <input type="text" class="form-control" id="form-city" placeholder="Ex : Lyon" required>
-                </div>
-                <div class="form-group">
-                    <label for="city-number">
-                        Code postal :
-                    </label>
-                    <input type="text" class="form-control" id="form-city-number" placeholder="Ex : 69000" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">
@@ -152,11 +146,11 @@ for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de r�
     totalPriceTable.push(priceProductsInTheBasket) // Envoie du prix des articles dans le tableau //
 }
 
-    const reducer = (accumulator, currentValue) => accumulator + currentValue; // Constante pour le calcul du prix //
+const reducer = (accumulator, currentValue) => accumulator + currentValue; // Constante pour le calcul du prix //
 
-    const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
+const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
         
-    document.getElementById('price-display').innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
+document.getElementById('price-display').innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
 
     // ---------- Formulaire ---------- //
 
@@ -187,11 +181,11 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
     const writingError = ("votre saisie n'est pas valide, ")
 
     const regExNamesAndCity = (value) => { // Création d'une regex pour le nom, le prénom et la ville //
-        return /^[A-Za-z\-\s]{3,20}$/.test(value); // Description de la condition a tester //
+        return /^[A-Za-zÀ-ÿ\-\s]{3,20}$/.test(value); // Description de la condition a tester //
     }
 
     const regExAdress = (value) => { // Création d'un regex pour l'adresse //
-        return /^[A-Za-z0-9\-\s]{5,35}$/.test(value);
+        return /^[A-Za-zÀ-ÿ0-9\-\s]{5,35}$/.test(value);
     }
 
     const regExEmail = (value) => { // Création de la regex pour l' Email //
@@ -199,7 +193,7 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
     }
 
     function nameConfirmation() { // Fonction pour le test de la valeur  //
-        const customerName = contact.name; // Constante de récupération des valeurs 
+        const customerName = contact.lastName; // Constante de récupération des valeurs 
         if(regExNamesAndCity(customerName)){ // Saisie de la valeur a tester avec la RegEx //
             return true;
         }else{
@@ -209,11 +203,21 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
     };
 
     function firstnameConfirmation() {
-        const customerFirstname = contact.name;
+        const customerFirstname = contact.firstName;
         if(regExNamesAndCity(customerFirstname)){
             return true;
         }else{
             alert(textAlert('Prénom'));
+            return false;
+        }
+    };
+
+    function adressConfirmation() {
+        const customerAdress = contact.address;
+        if(regExAdress(customerAdress)){
+            return true;
+        }else{
+            alert("Adresse : " + writingError + "entrez votre adresse sans caractères spéciaux")
             return false;
         }
     };
@@ -238,17 +242,7 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
         }
     };
 
-    function adressConfirmation() {
-        const customerAdress = contact.adress;
-        if(regExAdress(customerAdress)){
-            return true;
-        }else{
-            alert("Adresse : " + writingError + "entrez votre adresse sans caractères spéciaux")
-            return false;
-        }
-    };
-
-    if(nameConfirmation(), firstnameConfirmation(), cityConfirmation(), emailConfirmation(), adressConfirmation()) { // Fonction de validation, si le formulaire est bien rempli, envoyer dans le local storage //
+    if(nameConfirmation(), firstnameConfirmation(), adressConfirmation(), cityConfirmation(), emailConfirmation()) { // Fonction de validation, si le formulaire est bien rempli, envoyer dans le local storage //
         localStorage.setItem('contact', JSON.stringify(contact)); // Envoie des informations du formulaire dans le local storage et conversion JSON //
     };
     
@@ -275,6 +269,7 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
     .then((response) => response.json())
     .then((r) => {
         localStorage.setItem("order", JSON.stringify(r.orderId)); // Récupération du numéro de commande dans le local storage //
+        localStorage.setItem("customer", JSON.stringify(r.contact.firstName));
         localStorage.removeItem('productSelected');
         localStorage.removeItem('contact');
         window.location.href = 'order.html'; // Redirection vers la page de confirmation //
