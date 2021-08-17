@@ -40,13 +40,17 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
                 </div>
             </div>`
 
-        document.getElementById('product-card').innerHTML = productPage;
+        const productDisplay = document.getElementById("product-card"); // Condition d'affichage du code (error inner.html) //
+
+        if(productDisplay){ // Injection du code //
+            productDisplay.innerHTML = productPage;
+        };
 
         // ---------- Lenses --------- //
 
-        const choice = document.getElementById('lenses-select'); // Boucle de récupération des objectifs //
+        const choice = document.getElementById('lenses-select'); // Sélection de l'emplacement de l'option //
 
-        response.lenses.forEach (function (lenses) {
+        response.lenses.forEach (function (lenses) { // Boucle de récupération des objectifs //
             let option = document.createElement('option');
             option.value = lenses;
             option.textContent = lenses;
@@ -61,7 +65,6 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
             event.preventDefault();
 
             const formChoice = choice.value; // Récupération du choix au formulaire //
-            console.log(formChoice);
 
             let productOption = { // Récupération des valeurs du formulaire //
                 image : response.imageUrl,
@@ -104,5 +107,3 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
         });
 
     })
-    
-    .catch((erreur) => console.log("erreur : " + erreur));
