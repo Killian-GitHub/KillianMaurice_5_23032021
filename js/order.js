@@ -1,11 +1,23 @@
+// ---------- Numéro de commande ---------- //
+
 const orderNumber = JSON.parse(localStorage.getItem ("order")); // Récupération du numéro de commande //
 
-const customerName = JSON.parse(localStorage.getItem ("customer")); // Récupération du prénom du client //
+const orderIdDisplay = document.getElementById("order-id"); // Condition d'affichage du code (error inner.html) //
 
-document.getElementById('order-id').innerHTML = orderNumber; // Insertion du numéro de commande //
-
-document.getElementById('customer-name').innerHTML = customerName; // Insertion du prénom du client //
+if(orderIdDisplay){ // Injection du code //
+    orderIdDisplay.innerHTML = orderNumber;
+};
 
 localStorage.removeItem('order'); // Suppression du numéro de commande //
 
-localStorage.removeItem('customer'); // Suppression du prénom du client//
+// ---------- Nom ---------- //
+
+const customerName = JSON.parse(localStorage.getItem ("customer")); // Récupération du prénom du client //
+
+const customerNameDisplay = document.getElementById("customer-name"); // Condition d'affichage du code (error inner.html) //
+
+if(customerNameDisplay){ // Injection du code //
+    customerNameDisplay.innerHTML = customerName;
+};
+
+localStorage.removeItem('customer'); // Suppression du prénom du client //
