@@ -23,7 +23,10 @@ fetch('http://localhost:3000/api/cameras') // Requête http //
             </div>`
         }
 
-        document.getElementById("camera-cards").innerHTML = getAllCameras; // Insertion des produits //
-    })
+        const camerasDisplay = document.getElementById("camera-cards"); // Condition d'affichage du code (error inner.html) //
 
-    .catch((erreur) => console.log("erreur : " + erreur));
+        if(camerasDisplay){ // Injection du code //
+            camerasDisplay.innerHTML = getAllCameras;
+        };
+
+    })
