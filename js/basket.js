@@ -1,20 +1,18 @@
 let productRegisteredInLocalStorage = JSON.parse(localStorage.getItem ("productSelected")); // Variable key/value du local storage //
 
-var productBasket = document.getElementById('product-basket'); // Sélection du panier //
+const emptyBasket = // Code html panier vide //
+    `<div class="empty-basket mt-4 mb-4 text-center">
+        <p>
+            Votre panier est vide.
+        </p>
+    </div>`
+;
 
-if (productRegisteredInLocalStorage === null) { // Si le panier est vide renvoyer panier vide //
-    const emptyBasket = `
-        <div class="empty-basket mt-4 mb-4 text-center">
-            <p>
-                Votre panier est vide.
-            </p>
-        </div>
-       `;
+const emptyBasketDisplay = document.getElementById('product-basket'); // Sélection du panier //
 
-    productBasket.innerHTML = emptyBasket;
-}
-
-else{ // Si il y a un article dans le panier injecter le produit dans la page //
+if (productRegisteredInLocalStorage === null){ // Si le panier est vide renvoyer panier vide //
+    emptyBasketDisplay.innerHTML = emptyBasket;
+} else { // Si il y a un article dans le panier injecter le produit dans la page //
     let inTheBasket = [];
 
     for(j = 0; j < productRegisteredInLocalStorage.length; j++){ // Boucle de récupération du tableau //
@@ -40,9 +38,11 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
             </div>`
     }
 
+    const basketDisplay = document.getElementById('product-basket');
+
     if(j === productRegisteredInLocalStorage.length) { // Condition de récupération des éléments //
-        document.getElementById('product-basket').innerHTML = inTheBasket;
-    }
+        basketDisplay.innerHTML = inTheBasket;
+    };
 
     // ---------- Bouton pour vider le panier ---------- //
 
@@ -58,11 +58,11 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
     btnDeleteBasket.addEventListener('click', function(event) { // Initialisation du bouton //
     event.preventDefault()
 
-    localStorage.removeItem('productSelected'); // Suppression de tous produits dans le panier //
+        localStorage.removeItem('productSelected'); // Suppression de tous produits dans le panier //
 
-    alert('Votre panier a été vidé') // Message d'alerte //
+        alert('Votre panier a été vidé') // Message d'alerte //
 
-    window.location.href = 'basket.html'; // Rechargement de la page //
+        window.location.href = 'basket.html'; // Rechargement de la page //
 
     })
 
@@ -102,8 +102,12 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
                 </div>
             </form>
         </div>`;
-    
-    document.getElementById('order-form').innerHTML = orderForm;
+
+    const formDisplay = document.getElementById("order-form"); // Condition d'affichage du code (error inner.html) //
+
+    if(formDisplay){ // Injection du code //
+        formDisplay.innerHTML = orderForm;
+    };
 
     const validateTheOrder = // Création Html du paiement //
         `<div class="card-body">
@@ -132,7 +136,11 @@ else{ // Si il y a un article dans le panier injecter le produit dans la page //
             </div>
         </div>`;
 
-        document.getElementById('validate-the-order').innerHTML = validateTheOrder;
+    const validDisplay = document.getElementById("validate-the-order"); // Condition d'affichage du code (error inner.html) //
+
+    if(validDisplay){ // Injection du code //
+        validDisplay.innerHTML = validateTheOrder;
+    };
 
 };
 
@@ -274,6 +282,5 @@ btnForValidOrder.addEventListener('click', function(event){ // Initialisation du
         localStorage.removeItem('contact');
         window.location.href = 'order.html'; // Redirection vers la page de confirmation //
     })
-    .catch((erreur) => console.log("erreur : " + erreur));
-
+    
 });

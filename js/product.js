@@ -50,7 +50,7 @@ fetch(`http://localhost:3000/api/cameras/${productId}`) // Requête http //
 
         const choice = document.getElementById('lenses-select'); // Sélection de l'emplacement de l'option //
 
-        response.lenses.forEach (function (lenses) { // Boucle de récupération des objectifs //
+        response.lenses.forEach(function (lenses) { // Boucle de récupération des objectifs //
             let option = document.createElement('option');
             option.value = lenses;
             option.textContent = lenses;
