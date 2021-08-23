@@ -146,7 +146,9 @@ if(basketDisplay){ // condition d'affichage du panier //
 
     // ---------- Prix total ---------- //
         
-let totalPriceTable = []; // Tableau de regroupement du prix des produits // 
+let totalPriceTable = []; // Tableau de regroupement du prix des produits //
+
+let priceDisplay = document.getElementById('price-display');
 
 if(productRegisteredInLocalStorage){
     for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de récupération des prix //
@@ -159,7 +161,9 @@ if(productRegisteredInLocalStorage){
 
     const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
             
-    document.getElementById('price-display').innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
+    if(priceDisplay){
+        priceDisplay.innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
+    }
 };
 
     // ---------- Formulaire ---------- //
