@@ -30,3 +30,7 @@ fetch('http://localhost:3000/api/cameras') // Requête http //
         };
 
     })
+    .catch(error => {
+        error('Nous ne parvenons pas à vous connecter, veuillez vérifiez votre réseau et reessayer');
+        console.log("erreur : " + erreur);
+    });

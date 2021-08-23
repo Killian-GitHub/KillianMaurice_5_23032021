@@ -287,7 +287,10 @@ if(btnForValidOrder){
             localStorage.removeItem('productSelected');
             localStorage.removeItem('contact');
             window.location.href = 'order.html'; // Redirection vers la page de confirmation //
+        })
+        .catch(error => {
+            error('Nous ne parvenons pas à vous connecter, veuillez vérifiez votre réseau et reessayer');
+            console.log("erreur : " + erreur);
         });
-        
     });
 };
