@@ -1,49 +1,49 @@
 let productRegisteredInLocalStorage = JSON.parse(localStorage.getItem ("productSelected")); // Variable key/value du local storage //
 
-const emptyBasket = // Code html panier vide //
+const basketDisplay = document.getElementById('product-basket'); // Sélection du panier //
+
+if(basketDisplay){ // condition d'affichage du panier //
+    
+    const emptyBasket = // Code html panier vide //
     `<div class="empty-basket mt-4 mb-4 text-center">
         <p>
             Votre panier est vide.
         </p>
     </div>`
-;
+    ;
 
-const emptyBasketDisplay = document.getElementById('product-basket'); // Sélection du panier //
+    if (productRegisteredInLocalStorage === null){ // Si le panier est vide renvoyer panier vide //
+        basketDisplay.innerHTML = emptyBasket;
+    } else { // Si il y a un article dans le panier injecter le produit dans la page //
+        let inTheBasket = [];
 
-if (productRegisteredInLocalStorage === null){ // Si le panier est vide renvoyer panier vide //
-    emptyBasketDisplay.innerHTML = emptyBasket;
-} else { // Si il y a un article dans le panier injecter le produit dans la page //
-    let inTheBasket = [];
+        for(j = 0; j < productRegisteredInLocalStorage.length; j++){ // Boucle de récupération du tableau //
 
-    for(j = 0; j < productRegisteredInLocalStorage.length; j++){ // Boucle de récupération du tableau //
+            inTheBasket = inTheBasket + // Code html du produit //
+                `<div class="row mt-3 mb-3 pb-3 border-bottom">
+                    <div class="col-12 col-md-3 text-center">
+                        <!-- Insertion de la photo du produit -->
+                        <img src="${productRegisteredInLocalStorage[j].image}" class="panier__img" alt="Appareil photo vintage" />
+                    </div>
+                    <div class="col-6 col-md-3 text-left text-md-center mt-5">
+                        <!-- Insertion de la désignation du produit -->
+                        ${productRegisteredInLocalStorage[j].name}
+                    </div>
+                    <div class="col-6 col-md-3 text-right text-md-center mt-5">
+                        <!-- Insertion de l'option du produit -->
+                        ${productRegisteredInLocalStorage[j].lense}
+                    </div>
+                    <div class="col-12 col-md-3 text-right text-md-center mt-5">
+                        <!-- Insertion du prix produit -->
+                        ${(productRegisteredInLocalStorage[j].price/100).toFixed(2).replace(".",",")} €
+                    </div>
+                </div>`
+        }
 
-        inTheBasket = inTheBasket + // Code html du produit //
-            `<div class="row mt-3 mb-3 pb-3 border-bottom">
-                <div class="col-12 col-md-3 text-center">
-                    <!-- Insertion de la photo du produit -->
-                    <img src="${productRegisteredInLocalStorage[j].image}" class="panier__img" alt="Appareil photo vintage" />
-                </div>
-                <div class="col-6 col-md-3 text-left text-md-center mt-5">
-                    <!-- Insertion de la désignation du produit -->
-                    ${productRegisteredInLocalStorage[j].name}
-                </div>
-                <div class="col-6 col-md-3 text-right text-md-center mt-5">
-                    <!-- Insertion de l'option du produit -->
-                    ${productRegisteredInLocalStorage[j].lense}
-                </div>
-                <div class="col-12 col-md-3 text-right text-md-center mt-5">
-                    <!-- Insertion du prix produit -->
-                    ${(productRegisteredInLocalStorage[j].price/100).toFixed(2).replace(".",",")} €
-                </div>
-            </div>`
-    }
-
-    const basketDisplay = document.getElementById('product-basket');
-
-    if(j === productRegisteredInLocalStorage.length) { // Condition de récupération des éléments //
-        basketDisplay.innerHTML = inTheBasket;
+        if(j === productRegisteredInLocalStorage.length) { // Condition de récupération des éléments //
+            basketDisplay.innerHTML = inTheBasket;
+        };
     };
-
     // ---------- Bouton pour vider le panier ---------- //
 
     const buttonForDeleteBasket = // Création Html du bouton //
@@ -148,139 +148,144 @@ if (productRegisteredInLocalStorage === null){ // Si le panier est vide renvoyer
         
 let totalPriceTable = []; // Tableau de regroupement du prix des produits // 
 
-for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de récupération des prix //
-    priceProductsInTheBasket = productRegisteredInLocalStorage[k].price; // Récupération du prix des produits dans le local storage //
+let priceDisplay = document.getElementById('price-display');
 
-    totalPriceTable.push(priceProductsInTheBasket) // Envoie du prix des articles dans le tableau //
-}
+if(priceDisplay){
+    for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de récupération des prix //
+        priceProductsInTheBasket = productRegisteredInLocalStorage[k].price; // Récupération du prix des produits dans le local storage //
 
-const reducer = (accumulator, currentValue) => accumulator + currentValue; // Constante pour le calcul du prix //
+        totalPriceTable.push(priceProductsInTheBasket) // Envoie du prix des articles dans le tableau //
+    }
 
-const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
-        
-document.getElementById('price-display').innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
+    const reducer = (accumulator, currentValue) => accumulator + currentValue; // Constante pour le calcul du prix //
+
+    const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
+            
+    priceDisplay.innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
+};
 
     // ---------- Formulaire ---------- //
 
 const btnForValidOrder = document.getElementById('btn-for-valid-order'); // Sélection du bouton //
 
+if(btnForValidOrder){
+    btnForValidOrder.addEventListener('click', function(event){ // Initialisation du bouton //
+        event.preventDefault()
 
-btnForValidOrder.addEventListener('click', function(event){ // Initialisation du bouton //
-    event.preventDefault()
-
-    class Form{ // Création d'une classe pour regrouper les valeurs du formulaire //
-        constructor(){
-        this.lastName = document.getElementById('form-name').value;
-        this.firstName = document.getElementById('form-firstname').value;
-        this.address = document.getElementById('form-adress').value;
-        this.city = document.getElementById('form-city').value;
-        this.email = document.getElementById('form-email').value;
+        class Form{ // Création d'une classe pour regrouper les valeurs du formulaire //
+            constructor(){
+            this.lastName = document.getElementById('form-name').value;
+            this.firstName = document.getElementById('form-firstname').value;
+            this.address = document.getElementById('form-adress').value;
+            this.city = document.getElementById('form-city').value;
+            this.email = document.getElementById('form-email').value;
+            }
         }
-    }
 
-    const contact = new Form(); // Boucle de création du nouvel objet //
+        const contact = new Form(); // Boucle de création du nouvel objet //
 
-    // ----- Validation des données du formulaire ----- //
+        // ----- Validation des données du formulaire ----- //
 
-    const textAlert = (value) => { // Création de l'alerte de saise pour nom et prénom //
-        return `${value} : Les chiffres et symboles ne sont pas autorisés, utilisez entre 3 et 20 caractères`;
-    }
-
-    const writingError = ("votre saisie n'est pas valide, ")
-
-    const regExNamesAndCity = (value) => { // Création d'une regex pour le nom, le prénom et la ville //
-        return /^[A-Za-zÀ-ÿ\-\s]{3,20}$/.test(value); // Description de la condition a tester //
-    }
-
-    const regExAdress = (value) => { // Création d'un regex pour l'adresse //
-        return /^[A-Za-zÀ-ÿ0-9\-\s]{5,35}$/.test(value);
-    }
-
-    const regExEmail = (value) => { // Création de la regex pour l' Email //
-        return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(value);
-    }
-
-    function nameConfirmation() { // Fonction pour le test de la valeur  //
-        const customerName = contact.lastName; // Constante de récupération des valeurs 
-        if(regExNamesAndCity(customerName)){ // Saisie de la valeur a tester avec la RegEx //
-            return true;
-        }else{
-            alert(textAlert('Nom')); // Envoie de l'alerte si la saise n'est pas validé par la RegEx //
-            return false;
+        const textAlert = (value) => { // Création de l'alerte de saise pour nom et prénom //
+            return `${value} : Les chiffres et symboles ne sont pas autorisés, utilisez entre 3 et 20 caractères`;
         }
-    };
 
-    function firstnameConfirmation() {
-        const customerFirstname = contact.firstName;
-        if(regExNamesAndCity(customerFirstname)){
-            return true;
-        }else{
-            alert(textAlert('Prénom'));
-            return false;
+        const writingError = ("votre saisie n'est pas valide, ")
+
+        const regExNamesAndCity = (value) => { // Création d'une regex pour le nom, le prénom et la ville //
+            return /^[A-Za-zÀ-ÿ\-\s]{3,20}$/.test(value); // Description de la condition a tester //
         }
-    };
 
-    function adressConfirmation() {
-        const customerAdress = contact.address;
-        if(regExAdress(customerAdress)){
-            return true;
-        }else{
-            alert("Adresse : " + writingError + "entrez votre adresse sans caractères spéciaux")
-            return false;
+        const regExAdress = (value) => { // Création d'un regex pour l'adresse //
+            return /^[A-Za-zÀ-ÿ0-9\-\s]{5,35}$/.test(value);
         }
-    };
 
-    function cityConfirmation() {
-        const customerCity = contact.city;
-        if(regExNamesAndCity(customerCity)){
-            return true;
-        }else{
-            alert("Ville : " + writingError + "entrez le nom de votre ville")
-            return false;
+        const regExEmail = (value) => { // Création de la regex pour l' Email //
+            return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(value);
         }
-    };
 
-    function emailConfirmation() {
-        const customerEmail = contact.email;
-        if(regExEmail(customerEmail)){
-            return true;
-        }else{
-            alert("Email : " + writingError + "saisissez votre email")
-            return false;
-        }
-    };
+        function nameConfirmation() { // Fonction pour le test de la valeur  //
+            const customerName = contact.lastName; // Constante de récupération des valeurs 
+            if(regExNamesAndCity(customerName)){ // Saisie de la valeur a tester avec la RegEx //
+                return true;
+            }else{
+                alert(textAlert('Nom')); // Envoie de l'alerte si la saise n'est pas validé par la RegEx //
+                return false;
+            }
+        };
 
-    if(nameConfirmation(), firstnameConfirmation(), adressConfirmation(), cityConfirmation(), emailConfirmation()) { // Fonction de validation, si le formulaire est bien rempli, envoyer dans le local storage //
-        localStorage.setItem('contact', JSON.stringify(contact)); // Envoie des informations du formulaire dans le local storage et conversion JSON //
-    };
-    
+        function firstnameConfirmation() {
+            const customerFirstname = contact.firstName;
+            if(regExNamesAndCity(customerFirstname)){
+                return true;
+            }else{
+                alert(textAlert('Prénom'));
+                return false;
+            }
+        };
 
-    // ---------- Serveur ---------- //
+        function adressConfirmation() {
+            const customerAdress = contact.address;
+            if(regExAdress(customerAdress)){
+                return true;
+            }else{
+                alert("Adresse : " + writingError + "entrez votre adresse sans caractères spéciaux")
+                return false;
+            }
+        };
 
-    let products = []; // Création d'un array pour les Id produits //
-    if (localStorage.getItem('productSelected') !== null) { // Condition de récupération //
-        let productTab = JSON.parse(localStorage.getItem('productSelected')); 
-        productTab.forEach(p => { // Boucle de récupération des Id //
-        products.push(p.id);
+        function cityConfirmation() {
+            const customerCity = contact.city;
+            if(regExNamesAndCity(customerCity)){
+                return true;
+            }else{
+                alert("Ville : " + writingError + "entrez le nom de votre ville")
+                return false;
+            }
+        };
+
+        function emailConfirmation() {
+            const customerEmail = contact.email;
+            if(regExEmail(customerEmail)){
+                return true;
+            }else{
+                alert("Email : " + writingError + "saisissez votre email")
+                return false;
+            }
+        };
+
+        if(nameConfirmation(), firstnameConfirmation(), adressConfirmation(), cityConfirmation(), emailConfirmation()) { // Fonction de validation, si le formulaire est bien rempli, envoyer dans le local storage //
+            localStorage.setItem('contact', JSON.stringify(contact)); // Envoie des informations du formulaire dans le local storage et conversion JSON //
+        };
+        
+
+        // ---------- Serveur ---------- //
+
+        let products = []; // Création d'un array pour les Id produits //
+        if (localStorage.getItem('productSelected') !== null) { // Condition de récupération //
+            let productTab = JSON.parse(localStorage.getItem('productSelected')); 
+            productTab.forEach(p => { // Boucle de récupération des Id //
+            products.push(p.id);
+            })
+        };
+
+        fetch("http://localhost:3000/api/cameras/order", { // Envoie de la commande a l'API //
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+                contact, products 
+            }),
         })
-    };
-
-    fetch("http://localhost:3000/api/cameras/order", { // Envoie de la commande a l'API //
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ 
-            contact, products 
-        }),
-    })
-    .then((response) => response.json())
-    .then((r) => {
-        localStorage.setItem("order", JSON.stringify(r.orderId)); // Récupération du numéro de commande dans le local storage //
-        localStorage.setItem("customer", JSON.stringify(r.contact.firstName));
-        localStorage.removeItem('productSelected');
-        localStorage.removeItem('contact');
-        window.location.href = 'order.html'; // Redirection vers la page de confirmation //
-    })
-    
-});
+        .then((response) => response.json())
+        .then((r) => {
+            localStorage.setItem("order", JSON.stringify(r.orderId)); // Récupération du numéro de commande dans le local storage //
+            localStorage.setItem("customer", JSON.stringify(r.contact.firstName));
+            localStorage.removeItem('productSelected');
+            localStorage.removeItem('contact');
+            window.location.href = 'order.html'; // Redirection vers la page de confirmation //
+        })
+        
+    });
+};
