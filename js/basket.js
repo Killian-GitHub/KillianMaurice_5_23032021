@@ -148,20 +148,18 @@ if(basketDisplay){ // condition d'affichage du panier //
         
 let totalPriceTable = []; // Tableau de regroupement du prix des produits // 
 
-let priceDisplay = document.getElementById('price-display');
-
-if(priceDisplay){
+if(productRegisteredInLocalStorage){
     for(let k = 0; k < productRegisteredInLocalStorage.length; k++){ // Boucle de récupération des prix //
         priceProductsInTheBasket = productRegisteredInLocalStorage[k].price; // Récupération du prix des produits dans le local storage //
 
         totalPriceTable.push(priceProductsInTheBasket) // Envoie du prix des articles dans le tableau //
-    }
+    };
 
     const reducer = (accumulator, currentValue) => accumulator + currentValue; // Constante pour le calcul du prix //
 
     const totalPrice = totalPriceTable.reduce(reducer,0); // Envoie du calcul dans le total //
             
-    priceDisplay.innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
+    document.getElementById('price-display').innerHTML = (totalPrice/100).toFixed(2).replace(".",",") + ' €';
 };
 
     // ---------- Formulaire ---------- //
@@ -285,7 +283,7 @@ if(btnForValidOrder){
             localStorage.removeItem('productSelected');
             localStorage.removeItem('contact');
             window.location.href = 'order.html'; // Redirection vers la page de confirmation //
-        })
+        });
         
     });
 };
